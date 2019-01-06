@@ -1,4 +1,4 @@
-package ma.emsi.miage3.ecommerce.ejbservices.models;
+package ma.emsi.miage3.ecommerce.models;
 
 
 /**

@@ -1,4 +1,4 @@
-package ma.emsi.miage3.ecommerce.ejbservices.dao;
+package ma.emsi.miage3.ecommerce.dao;
 
 
 /**
