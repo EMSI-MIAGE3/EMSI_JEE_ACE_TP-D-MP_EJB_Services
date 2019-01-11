@@ -9,5 +9,8 @@
         <module name="E-Commerce-EJB-Services" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ecommerce.models" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
