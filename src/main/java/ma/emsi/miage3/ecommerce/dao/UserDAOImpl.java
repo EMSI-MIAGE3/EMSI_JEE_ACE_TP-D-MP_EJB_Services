@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
   public User add(User user) {
     try {
       user = this.merge(user);
-      if(user.getRole().equals(UserRole.client)){
+      if(user != null && user.getRole().equals(UserRole.client)){
         ShoppingCart shoppingCart = new ShoppingCart(user);
         entityManager.merge(shoppingCart);
       }
@@ -52,7 +52,6 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public boolean delete(Integer userID) {
     try {
-      System.out.println(userID);
       User user = this.get(userID);
       if(user.getRole().equals(UserRole.client)){
         entityManager.remove(user.getShoppingCart());
@@ -85,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<User> getAll() {
     try {
-      return entityManager.createQuery("select u from User u").getResultList();
+      return (List<User>) entityManager.createQuery("select u from User u").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();

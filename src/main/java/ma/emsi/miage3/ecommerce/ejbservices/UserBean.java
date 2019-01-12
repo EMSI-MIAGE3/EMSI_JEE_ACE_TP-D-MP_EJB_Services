@@ -20,9 +20,7 @@ public class UserBean implements UserRemote {
 
   @Override
   public List<User> getAllUsers() {
-    List<User> users = userDAO.getAll();
-    System.out.println(users);
-    return users;
+    return userDAO.getAll();
   }
 
   @Override

@@ -5,6 +5,7 @@ import ma.emsi.miage3.ecommerce.models.Article;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class ArticleRuleImpl implements ArticleRule {
@@ -14,29 +15,35 @@ public class ArticleRuleImpl implements ArticleRule {
 
   @Override
   public boolean isUniqueName(String name, Integer articleID){
-    System.out.println(articleDAO);
     Article article = articleDAO.findByName(name);
-    return (  (article == null)   ||    (articleID != null && article.getId() != articleID)  );
+    return (  (article == null)   ||    (articleID != null && article.getId().equals(articleID))  );
   }
 
   @Override
   public boolean isUniqueReference(String reference, Integer articleID){
-    System.out.println(articleDAO);
     Article article = articleDAO.findByReference(reference);
-    return (  (article == null)   ||    (articleID != null && article.getId() != articleID)  );
+    return (  (article == null)   ||    (articleID != null && article.getId().equals(articleID))  );
   }
 
   @Override
   public boolean isValidQuantity(Article article){
-    System.out.println(articleDAO);
     return (article != null && article.getStockQuantity() >= 0);
   }
 
   @Override
   public boolean isValidQuantity(Integer articleID, Integer quantity){
-    System.out.println(articleDAO);
     Article article = articleDAO.get(articleID);
     return (article != null && (article.getStockQuantity() - quantity) >= 0);
+  }
+
+  @Override
+  public boolean isExistInShoppingCart(Integer articleID) {
+    return articleDAO.searchInShoppingCarts(articleID).size() > 0;
+  }
+
+  @Override
+  public boolean isExistInOrder(Integer articleID) {
+    return articleDAO.searchInOrders(articleID).size() > 0;
   }
 
 }

@@ -15,6 +15,8 @@ public interface ArticleDAO {
   public List<Article> getAll();
   public Article findByReference(String reference);
   public Article findByName(String name);
+  public List<Article> searchInShoppingCarts(Integer articleID);
+  public List<Article> searchInOrders(Integer articleID);
   public List<Article> searchByReference(String referencePredicat);
   public List<Article> searchByName(String namePredicat);
   public List<Article> searchByDescription(String descriptionPredicat);

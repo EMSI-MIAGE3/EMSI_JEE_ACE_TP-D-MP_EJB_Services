@@ -19,6 +19,9 @@ public class ShoppingCart implements Serializable {
   @JoinColumn(name = "shopping_cart_id")
   private List<ShoppingCartItem> shoppingCartItems;
 
+  @Transient
+  private Double totalAmount;
+
   public ShoppingCart() {
     super();
   }
@@ -52,14 +55,20 @@ public class ShoppingCart implements Serializable {
     this.shoppingCartItems = shoppingCartItems;
   }
 
+  public Double getTotalAmount() {
+    this.totalAmount = 0.0;
+    this.getShoppingCartItems().forEach(item -> totalAmount += item.getArticle().getPrice());
+    return this.totalAmount;
+  }
 
 
   @Override
   public String toString() {
     return "ShoppingCart{" +
             "id=" + id +
-            ", id=client_id" + clientOwner.getId() +
+            ", client_id" + clientOwner.getId() +
             ", shoppingCartItems=" + shoppingCartItems +
+            ", totalAmount=" + totalAmount +
             '}';
   }
 }

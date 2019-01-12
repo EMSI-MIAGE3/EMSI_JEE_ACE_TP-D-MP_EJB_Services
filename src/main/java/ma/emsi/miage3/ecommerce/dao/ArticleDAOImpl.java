@@ -19,7 +19,6 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public Article add(Article article) {
     try {
-      System.out.println(article);
       entityManager.persist(article);
       return article;
     }
@@ -32,7 +31,6 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public boolean delete(Integer articleID) {
     try {
-      System.out.println(articleID);
       entityManager.remove(this.get(articleID));
       return true;
     }
@@ -61,7 +59,7 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public List<Article> getAll() {
     try {
-      return entityManager.createQuery("select a from Article a").getResultList();
+      return (List<Article>) entityManager.createQuery("select a from Article a").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();
@@ -108,9 +106,31 @@ public class ArticleDAOImpl implements ArticleDAO{
   }
 
   @Override
+  public List<Article> searchInShoppingCarts(Integer articleID) {
+    try {
+      return (List<Article>) entityManager.createQuery("select a from Article a, ShoppingCartItem s where a.id = " + articleID + " and a.id = s.article.id").getResultList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public List<Article> searchInOrders(Integer articleID) {
+    try {
+      return (List<Article>) entityManager.createQuery("select a from Article a, OrderItem o where a.id = " + articleID + " and a.id = s.article.id").getResultList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
   public List<Article> searchByReference(String referencePredicat) {
     try {
-      return entityManager.createQuery("select a from Article a where a.reference LIKE '%" + referencePredicat + "%'").getResultList();
+      return (List<Article>) entityManager.createQuery("select a from Article a where a.reference LIKE '%" + referencePredicat + "%'").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();
@@ -121,7 +141,7 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public List<Article> searchByName(String namePredicat) {
     try {
-      return entityManager.createQuery("select a from Article a where a.name LIKE '%" + namePredicat + "%'").getResultList();
+      return (List<Article>) entityManager.createQuery("select a from Article a where a.name LIKE '%" + namePredicat + "%'").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();
@@ -132,7 +152,7 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public List<Article> searchByDescription(String descriptionPredicat) {
     try {
-      return entityManager.createQuery("select a from Article a where a.description LIKE '%" + descriptionPredicat + "%'").getResultList();
+      return (List<Article>) entityManager.createQuery("select a from Article a where a.description LIKE '%" + descriptionPredicat + "%'").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();

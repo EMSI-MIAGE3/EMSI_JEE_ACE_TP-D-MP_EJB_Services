@@ -26,7 +26,7 @@ public class Article implements Serializable {
   @Column(nullable = false)
   private double price;
 
-  @Column(nullable = true)
+  @Column
   private String pictureURI;
 
 
@@ -36,6 +36,7 @@ public class Article implements Serializable {
   }
 
   public Article(String reference, String name, String description, Integer stockQuantity, double price) {
+    super();
     this.reference = reference;
     this.name = name;
     this.description = description;
@@ -44,6 +45,7 @@ public class Article implements Serializable {
   }
 
   public Article(String reference, String name, String description, Integer stockQuantity, double price, String pictureURI) {
+    super();
     this.reference = reference;
     this.name = name;
     this.description = description;
@@ -93,7 +95,7 @@ public class Article implements Serializable {
   }
 
   public double getPrice() {
-    return price;
+    return this.price;
   }
 
   public void setPrice(double price) {

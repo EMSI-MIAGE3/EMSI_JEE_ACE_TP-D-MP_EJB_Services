@@ -19,6 +19,9 @@ public class Order implements Serializable {
   @JoinColumn(name = "order_id")
   private List<OrderItem> orderItems;
 
+  @Transient
+  private Double totalAmount;
+
   public Order() {
     super();
   }
@@ -52,12 +55,19 @@ public class Order implements Serializable {
     this.orderItems = orderItems;
   }
 
+  public Double getTotalAmount() {
+    this.totalAmount = 0.0;
+    this.getOrderItems().forEach(item -> totalAmount += item.getPrice());
+    return this.totalAmount;
+  }
+
   @Override
   public String toString() {
     return "Order{" +
             "id=" + id +
-            ", id=client_id" + clientOwner.getId() +
+            ", client_id" + clientOwner.getId() +
             ", orderItems=" + orderItems +
+            ", totalAmount=" + totalAmount +
             '}';
   }
 }

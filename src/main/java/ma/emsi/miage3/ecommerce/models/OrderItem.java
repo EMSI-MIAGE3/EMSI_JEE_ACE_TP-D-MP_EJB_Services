@@ -28,14 +28,27 @@ public class OrderItem implements Serializable {
   @Column(nullable = false)
   private Integer quantity;
 
+  @Column(nullable = false)
+  private Double price;
+
 
   public OrderItem() {
     super();
   }
 
-  public OrderItem(Article article, Integer quantity) {
+  public OrderItem(Order order, Article article, Integer quantity, Double price) {
+    super();
+    this.order = order;
     this.article = article;
     this.quantity = quantity;
+    this.price = price;
+  }
+
+  public OrderItem(Article article, Integer quantity, Double price) {
+    super();
+    this.article = article;
+    this.quantity = quantity;
+    this.price = price;
   }
 
   public Integer getId() {
@@ -70,7 +83,13 @@ public class OrderItem implements Serializable {
     this.order = order;
   }
 
+  public Double getPrice() {
+    return price;
+  }
 
+  public void setPrice(Double price) {
+    this.price = price;
+  }
 
   @Override
   public String toString() {
@@ -79,7 +98,7 @@ public class OrderItem implements Serializable {
             ", order_id=" + order.getId() +
             ", article=" + article +
             ", quantity=" + quantity +
+            ", price=" + price +
             '}';
   }
-
 }

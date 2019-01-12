@@ -33,7 +33,6 @@ public class ArticleBean implements ArticleRemote {
                     rule.isUniqueReference(article.getReference(), article.getId()) &&
                     rule.isValidQuantity(article)
     ){
-      System.out.println(article);
       return articleDAO.add(article);
     }
     else {
@@ -53,7 +52,12 @@ public class ArticleBean implements ArticleRemote {
 
   @Override
   public boolean deleteArticle(Integer articleID) {
-    return articleDAO.delete(articleID);
+    if(rule.isExistInShoppingCart(articleID)){
+      return false;
+    }
+    else {
+      return articleDAO.delete(articleID);
+    }
   }
 
   @Override

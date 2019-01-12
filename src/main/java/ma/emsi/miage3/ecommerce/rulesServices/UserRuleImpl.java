@@ -17,7 +17,6 @@ public class UserRuleImpl implements UserRule {
   private boolean isValidEmail(String email){
     if(email != null){
       String emailRegex = "[a-zA-Z0-9_.]+@[a-zA-Z0-9]+.[a-zA-Z]{2,3}[.] {0,1}[a-zA-Z]+";
-      System.out.println("EMAIL : " + email + "->" +  email.matches(emailRegex));
       return email.matches(emailRegex);
     }
     else
@@ -26,13 +25,11 @@ public class UserRuleImpl implements UserRule {
 
   private boolean isUniqueEmail(String email, Integer userID){
     User user = userDAO.findByEmail(email);
-    System.out.println("EMAIL-UNIQ : " + (  (user == null)   ||    (userID != null && user.getId() != userID)  ));
-    return (  (user == null)   ||    (userID != null && user.getId() != userID)  );
+    return (  (user == null)   ||    (userID != null && user.getId().equals(userID))  );
   }
 
   @Override
   public boolean isCheckedEmail(String email, Integer userID){
-    System.out.println("EMAIL-CHECK : " + (this.isValidEmail(email) && this.isUniqueEmail(email, userID)));
     return this.isValidEmail(email) && this.isUniqueEmail(email, userID);
   }
 
@@ -50,12 +47,11 @@ public class UserRuleImpl implements UserRule {
 
   private boolean isUniqueUserName(String userName, Integer userID){
     User user = userDAO.findByUserName(userName);
-    return (  (user == null)   ||    (userID != null && user.getId() != userID)  );
+    return (  (user == null)   ||    (userID != null && user.getId().equals(userID))  );
   }
 
   @Override
   public boolean isCheckedUserName(String userName, Integer userID){
-    System.out.println("UserName : " + userName  + "->" +  (this.isValidUserName(userName) && this.isUniqueUserName(userName, userID)));
     return this.isValidUserName(userName) && this.isUniqueUserName(userName, userID);
   }
 
@@ -73,7 +69,6 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedPassword(String password){
-    System.out.println("PWD : " + password + "->" + this.isValidPassword(password));
     return this.isValidPassword(password);
   }
 
@@ -90,7 +85,6 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedPhone(String phone){
-    System.out.println("PHONE : " + phone + "->" + this.isValidPhone(phone));
     return this.isValidPhone(phone);
   }
 
