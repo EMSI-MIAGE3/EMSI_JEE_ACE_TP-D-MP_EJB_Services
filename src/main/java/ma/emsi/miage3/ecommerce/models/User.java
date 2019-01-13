@@ -59,6 +59,18 @@ public class User implements Serializable {
     this.role = role;
   }
 
+  public User map(User user){
+    this.lastName = user.lastName;
+    this.firstName = user.firstName;
+    this.userName = user.userName;
+    this.email = user.email;
+    this.city = user.city;
+    this.phone = user.phone;
+    this.password = user.password;
+    this.role = user.role;
+    return this;
+  }
+
   public Integer getId() {
     return id;
   }

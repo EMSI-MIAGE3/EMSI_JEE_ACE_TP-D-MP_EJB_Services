@@ -54,6 +54,16 @@ public class Article implements Serializable {
     this.pictureURI = pictureURI;
   }
 
+  public Article map(Article article){
+    this.reference = article.reference;
+    this.name = article.name;
+    this.description = article.description;
+    this.stockQuantity = article.stockQuantity;
+    this.price = article.price;
+    this.pictureURI = article.pictureURI;
+    return this;
+  }
+
   public Integer getId() {
     return id;
   }

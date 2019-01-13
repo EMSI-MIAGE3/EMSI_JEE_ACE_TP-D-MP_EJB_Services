@@ -67,7 +67,9 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public User update(User user) {
-    return this.merge(user);
+    User update = this.get(user.getId());
+    update.map(user);
+    return update = this.merge(update);
   }
 
   @Override

@@ -19,7 +19,7 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public Article add(Article article) {
     try {
-      entityManager.persist(article);
+      entityManager.merge(article);
       return article;
     }
     catch (Exception e){
@@ -42,7 +42,9 @@ public class ArticleDAOImpl implements ArticleDAO{
 
   @Override
   public Article update(Article article) {
-    return this.add(article);
+    Article update = this.get(article.getId());
+    update.map(article);
+    return update = this.add(update);
   }
 
   @Override
@@ -119,7 +121,7 @@ public class ArticleDAOImpl implements ArticleDAO{
   @Override
   public List<Article> searchInOrders(Integer articleID) {
     try {
-      return (List<Article>) entityManager.createQuery("select a from Article a, OrderItem o where a.id = " + articleID + " and a.id = s.article.id").getResultList();
+      return (List<Article>) entityManager.createQuery("select a from Article a, OrderItem o where a.id = " + articleID + " and a.id = o.article.id").getResultList();
     }
     catch (Exception e){
       e.printStackTrace();
