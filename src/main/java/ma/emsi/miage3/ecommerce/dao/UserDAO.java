@@ -1,6 +1,7 @@
 package ma.emsi.miage3.ecommerce.dao;
 
 import ma.emsi.miage3.ecommerce.models.User;
+import ma.emsi.miage3.ecommerce.models.UserRole;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -12,6 +13,7 @@ public interface UserDAO {
   public User update(User user);
   public User get(Integer userID);
   public List<User> getAll();
+  public List<User> getAllByRole(UserRole role);
   public User findByUserName(String userName);
   public User findByEmail(String email);
   public User findByUserNameAndPassword(String userName, String password);

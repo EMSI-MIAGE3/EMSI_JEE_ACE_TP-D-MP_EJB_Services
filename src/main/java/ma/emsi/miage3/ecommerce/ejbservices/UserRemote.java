@@ -8,6 +8,8 @@ import java.util.List;
 @Remote
 public interface UserRemote {
   public List<User> getAllUsers();
+  public List<User> getAllClients();
+  public List<User> getAllAdministrators();
   public User getUser(Integer userID);
   public User addUser(User user);
   public User updateUser(User user);

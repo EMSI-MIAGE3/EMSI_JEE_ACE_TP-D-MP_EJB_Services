@@ -2,6 +2,7 @@ package ma.emsi.miage3.ecommerce.ejbservices;
 
 import ma.emsi.miage3.ecommerce.dao.UserDAO;
 import ma.emsi.miage3.ecommerce.models.User;
+import ma.emsi.miage3.ecommerce.models.UserRole;
 import ma.emsi.miage3.ecommerce.rulesServices.UserRule;
 import ma.emsi.miage3.ecommerce.rulesServices.UserRuleImpl;
 
@@ -21,6 +22,16 @@ public class UserBean implements UserRemote {
   @Override
   public List<User> getAllUsers() {
     return userDAO.getAll();
+  }
+
+  @Override
+  public List<User> getAllClients() {
+    return userDAO.getAllByRole(UserRole.client);
+  }
+
+  @Override
+  public List<User> getAllAdministrators() {
+    return userDAO.getAllByRole(UserRole.administrateur);
   }
 
   @Override

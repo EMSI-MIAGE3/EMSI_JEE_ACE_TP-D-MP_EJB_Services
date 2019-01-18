@@ -6,10 +6,7 @@ import ma.emsi.miage3.ecommerce.models.UserRole;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -87,6 +84,22 @@ public class UserDAOImpl implements UserDAO {
   public List<User> getAll() {
     try {
       return (List<User>) entityManager.createQuery("select u from User u").getResultList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public List<User> getAllByRole(UserRole role) {
+    try {
+      String jpql = "select u from User u where u.role = :role";
+      Query query = entityManager.createQuery(jpql);
+      query.setParameter("role", role);
+      List<User> users = (List<User>) query.getResultList();
+      System.out.println(users);
+      return users;
     }
     catch (Exception e){
       e.printStackTrace();
