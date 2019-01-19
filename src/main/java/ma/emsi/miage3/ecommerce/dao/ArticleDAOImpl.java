@@ -4,6 +4,7 @@ import ma.emsi.miage3.ecommerce.models.Article;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
+@TransactionManagement
 public class ArticleDAOImpl implements ArticleDAO{
 
   @PersistenceContext(unitName = "unite1")

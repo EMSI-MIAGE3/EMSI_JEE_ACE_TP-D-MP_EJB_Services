@@ -62,14 +62,12 @@ public class ShopBean implements ShopRemote {
   public boolean validateOrder(User user) {
 
     Order order = (Order) genericDAO.add(new Order(user));
-    user.getShoppingCart().getShoppingCartItems()
-                          .forEach(
-                                    sci -> {
-                                      OrderItem orderItem = new OrderItem(order, sci.getArticle(), sci.getQuantity(), sci.getArticle().getPrice());
-                                      genericDAO.add(orderItem);
-                                      ShoppingCartItem shoppingCartItem = (ShoppingCartItem) genericDAO.findByID(ShoppingCartItem.class, sci.getId());
-                                      genericDAO.getEntityManager().remove(shoppingCartItem);
-                                    });
-    return false;
+    for (ShoppingCartItem sci: user.getShoppingCart().getShoppingCartItems()) {
+        OrderItem orderItem = new OrderItem(order, sci.getArticle(), sci.getQuantity(), sci.getArticle().getPrice());
+        genericDAO.add(orderItem);
+        ShoppingCartItem shoppingCartItem = (ShoppingCartItem) genericDAO.findByID(ShoppingCartItem.class, sci.getId());
+        genericDAO.getEntityManager().remove(shoppingCartItem);
+    }
+    return true;
   }
 }
