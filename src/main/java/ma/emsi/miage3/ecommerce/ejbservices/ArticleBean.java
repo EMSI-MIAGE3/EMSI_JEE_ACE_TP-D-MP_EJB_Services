@@ -71,7 +71,19 @@ public class ArticleBean implements ArticleRemote {
   }
 
   @Override
-  public List<Article> searchByArticlesDescription(String descriptionPredicat) {
+  public List<Article> searchArticlesByDescription(String descriptionPredicat) {
     return articleDAO.searchByDescription(descriptionPredicat);
+  }
+
+  @Override
+  public List<Article> searchArticlesByNameAndDescription(String namePredicat, String descriptionPredicat) {
+    System.out.println("EXCLUSIVE");
+    return articleDAO.searchByNameAndDescription(namePredicat, descriptionPredicat);
+  }
+
+  @Override
+  public List<Article> searchArticlesByNameOrDescription(String namePredicat, String descriptionPredicat) {
+    System.out.println("INCLUSIVE");
+    return articleDAO.searchByNameOrDescription(namePredicat, descriptionPredicat);
   }
 }

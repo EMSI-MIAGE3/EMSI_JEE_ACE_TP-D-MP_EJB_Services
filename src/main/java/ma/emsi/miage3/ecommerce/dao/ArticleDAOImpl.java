@@ -161,4 +161,26 @@ public class ArticleDAOImpl implements ArticleDAO{
       return null;
     }
   }
+
+  @Override
+  public List<Article> searchByNameAndDescription(String namePredicat, String descriptionPredicat) {
+    try {
+      return (List<Article>) entityManager.createQuery("select a from Article a where a.name LIKE '%" + namePredicat + "%' and a.description LIKE '%" + descriptionPredicat + "%'").getResultList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public List<Article> searchByNameOrDescription(String namePredicat, String descriptionPredicat) {
+    try {
+      return (List<Article>) entityManager.createQuery("select a from Article a where a.name LIKE '%" + namePredicat + "%' or a.description LIKE '%" + descriptionPredicat + "%'").getResultList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      return null;
+    }
+  }
 }

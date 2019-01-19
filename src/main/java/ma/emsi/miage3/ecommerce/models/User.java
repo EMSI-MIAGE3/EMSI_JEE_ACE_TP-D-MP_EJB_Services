@@ -37,10 +37,10 @@ public class User implements Serializable {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  @OneToOne(mappedBy = "clientOwner", fetch = FetchType.EAGER)
+  @OneToOne(mappedBy = "clientOwner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private ShoppingCart shoppingCart;
 
-  @OneToMany(mappedBy = "clientOwner", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "clientOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Order> orders;
 
   public User() {
@@ -60,14 +60,14 @@ public class User implements Serializable {
   }
 
   public User map(User user){
-    this.lastName = user.lastName;
-    this.firstName = user.firstName;
-    this.userName = user.userName;
-    this.email = user.email;
-    this.city = user.city;
-    this.phone = user.phone;
-    this.password = user.password;
-    this.role = user.role;
+    this.lastName = (user.lastName == null || user.lastName.equals(""))? this.lastName : user.lastName;
+    this.firstName = (user.firstName == null || user.firstName.equals(""))? this.firstName : user.firstName;
+    this.userName = (user.userName == null || user.userName.equals(""))? this.userName : user.userName;
+    this.email = (user.email == null || user.email.equals(""))? this.email : user.email;
+    this.city = (user.city == null || user.city.equals(""))? this.city : user.city;
+    this.phone = (user.phone == null || user.phone.equals(""))? this.phone : user.phone;
+    this.password = (user.password == null || user.password.equals(""))? this.password : user.password;
+    this.role = (user.role == null)? this.role : user.role;
     return this;
   }
 

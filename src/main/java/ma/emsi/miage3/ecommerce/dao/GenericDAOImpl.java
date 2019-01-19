@@ -11,11 +11,19 @@ public class GenericDAOImpl implements GenericDAO {
   @PersistenceContext(unitName = "unite1")
   private EntityManager entityManager;
 
+  @Override
+  public EntityManager getEntityManager() {
+    return entityManager;
+  }
+
+  public void setEntityManager(EntityManager entityManager) {
+    this.entityManager = entityManager;
+  }
 
   @Override
   public Object add(Object object) {
     try {
-      entityManager.persist(object);
+      entityManager.merge(object);
       return object;
     }
     catch (Exception e){

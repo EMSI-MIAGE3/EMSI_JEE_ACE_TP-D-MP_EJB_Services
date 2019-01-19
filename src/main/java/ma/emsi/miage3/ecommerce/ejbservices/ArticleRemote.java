@@ -14,5 +14,7 @@ public interface ArticleRemote {
   public boolean deleteArticle(Integer articleID);
   public List<Article> searchArticlesByReference(String referencePredicat);
   public List<Article> searchArticlesByName(String namePredicat);
-  public List<Article> searchByArticlesDescription(String descriptionPredicat);
+  public List<Article> searchArticlesByDescription(String descriptionPredicat);
+  public List<Article> searchArticlesByNameAndDescription(String namePredicat, String descriptionPredicat);
+  public List<Article> searchArticlesByNameOrDescription(String namePredicat, String descriptionPredicat);
 }

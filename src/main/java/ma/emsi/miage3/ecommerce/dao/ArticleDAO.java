@@ -20,4 +20,6 @@ public interface ArticleDAO {
   public List<Article> searchByReference(String referencePredicat);
   public List<Article> searchByName(String namePredicat);
   public List<Article> searchByDescription(String descriptionPredicat);
+  public List<Article> searchByNameAndDescription(String namePredicat, String descriptionPredicat);
+  public List<Article> searchByNameOrDescription(String namePredicat, String descriptionPredicat);
 }

@@ -36,10 +36,16 @@ public class UserBean implements UserRemote {
 
   @Override
   public User getUser(Integer userID) {
+    System.out.println("TEST GET : " + userID);
     return userDAO.get(userID);
   }
 
   private User mergeUser(User user){
+    if(user != null && user.getId() != null && user.getId() != 0){
+      user = this.getUser(user.getId()).map(user);
+    }
+    System.out.println("TEST");
+    System.out.println("MERGE : " + user);
     if (
             user != null &&
                     rule.isCheckedEmail(user.getEmail(), user.getId()) &&
@@ -47,9 +53,16 @@ public class UserBean implements UserRemote {
                     rule.isCheckedPhone(user.getPhone()) &&
                     rule.isCheckedPassword(user.getPassword())
     ){
-      return userDAO.add(user);
+      if(user.getId() != null && user.getId() != 0){
+        System.out.println("DKHOL UPDATE : " + user);
+        return userDAO.update(user);
+      }else {
+        System.out.println("DKHOL ADD : " + user);
+        return userDAO.add(user);
+      }
     }
     else {
+      System.out.println("MA SDA9CH MERGE : " + user);
       return null;
     }
   }
@@ -61,6 +74,7 @@ public class UserBean implements UserRemote {
 
   @Override
   public User updateUser(User user) {
+    System.out.println("BEFORE X UPDATE : " + user);
     return this.mergeUser(user);
   }
 

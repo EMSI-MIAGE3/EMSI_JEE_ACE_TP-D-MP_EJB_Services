@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 
   private User merge(User user){
     try {
-      entityManager.persist(user);
+      entityManager.merge(user);
       return user;
     }
     catch (Exception e){
@@ -33,7 +33,9 @@ public class UserDAOImpl implements UserDAO {
   @Transactional
   public User add(User user) {
     try {
+      System.out.println("BEFORE ADD : " + user);
       user = this.merge(user);
+      System.out.println("AFTER ADD : " + user);
       if(user != null && user.getRole().equals(UserRole.client)){
         ShoppingCart shoppingCart = new ShoppingCart(user);
         entityManager.merge(shoppingCart);
@@ -64,9 +66,12 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public User update(User user) {
-    User update = this.get(user.getId());
-    update.map(user);
-    return update = this.merge(update);
+    System.out.println("BEFORE UPDATE : " + user);
+    User update = null;
+    //update.map(user);
+    update = this.merge(user);
+    System.out.println("AFTER UPDATE : " + update);
+    return update ;
   }
 
   @Override

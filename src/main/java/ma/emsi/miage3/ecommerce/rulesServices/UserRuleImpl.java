@@ -30,6 +30,7 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedEmail(String email, Integer userID){
+    System.out.println("MAIL NN VALID");
     return this.isValidEmail(email) && this.isUniqueEmail(email, userID);
   }
 
@@ -52,6 +53,7 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedUserName(String userName, Integer userID){
+    System.out.println("USERNAME NN VALID");
     return this.isValidUserName(userName) && this.isUniqueUserName(userName, userID);
   }
 
@@ -69,6 +71,7 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedPassword(String password){
+    System.out.println("PWD NN VALID");
     return this.isValidPassword(password);
   }
 
@@ -85,6 +88,7 @@ public class UserRuleImpl implements UserRule {
 
   @Override
   public boolean isCheckedPhone(String phone){
+    System.out.println("PHONE NN VALID");
     return this.isValidPhone(phone);
   }
 

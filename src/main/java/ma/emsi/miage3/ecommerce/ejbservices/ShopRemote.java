@@ -11,5 +11,5 @@ public interface ShopRemote {
   public boolean addItemToShoppingCart(ShoppingCartItem shoppingCartItem);
   public boolean updateItemInShoppingCart(ShoppingCartItem shoppingCartItem);
   public boolean removeItemFromShoppingCart(Integer shoppingCartItemID);
-  public boolean validateOrder(Order order);
+  public boolean validateOrder(User user);
 }
